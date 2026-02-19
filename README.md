@@ -91,7 +91,10 @@ A full-stack web application to manage students, marks, and attendance.
 
 - **Admin**: username=`admin`, password=`admin123`
 - **Teacher**: username=`teacher`, password=`teacher123`
-- **Student**: Register first, then login with roll number and password (set by admin)
+- **Student**: 
+  - **First-time login**: Use roll number as both roll number and password, then set up your password
+  - **After setup**: Use roll number + your password
+  - **Admin can also set password**: Admin can set password for any student from Students page
 
 ## Deployment
 

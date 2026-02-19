@@ -129,6 +129,23 @@ export default function Students() {
     }
   };
 
+  const handleSetPassword = async (student) => {
+    const newPassword = prompt(`Set password for ${student.name} (${student.rollNumber}):\n\nMinimum 6 characters`);
+    if (!newPassword) return;
+    
+    if (newPassword.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
+    }
+    
+    try {
+      await api.put(`/students/${student._id}/set-password`, { password: newPassword });
+      toast.success(`Password set for ${student.name}`);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Error setting password');
+    }
+  };
+
   const handleApprove = async (id) => {
     try {
       await api.put(`/students/${id}/approve`);
@@ -503,6 +520,13 @@ export default function Students() {
                             className="text-blue-600 hover:underline mr-2"
                           >
                             Edit
+                          </button>
+                          <button
+                            onClick={() => handleSetPassword(student)}
+                            className="text-purple-600 hover:underline mr-2"
+                            title="Set/Reset Password"
+                          >
+                            Set Password
                           </button>
                           <button
                             onClick={() => handleDelete(student._id)}

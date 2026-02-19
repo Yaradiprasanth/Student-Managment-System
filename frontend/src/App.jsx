@@ -8,6 +8,7 @@ import Attendance from './pages/Attendance';
 import Marks from './pages/Marks';
 import StudentProfile from './pages/StudentProfile';
 import StudentLogin from './pages/StudentLogin';
+import SetupPassword from './pages/SetupPassword';
 import Layout from './components/Layout';
 import Toast from './components/Toast';
 
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/student-login" element={<StudentLogin />} />
+          <Route path="/setup-password" element={<SetupPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
             <Route index element={<Dashboard />} />

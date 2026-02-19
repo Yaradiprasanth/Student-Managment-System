@@ -111,6 +111,26 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
   }
 });
 
+// Set/Reset student password (Admin only)
+router.put('/:id/set-password', auth, adminOnly, async (req, res) => {
+  try {
+    const { password } = req.body;
+    if (!password) {
+      return res.status(400).json({ message: 'Password is required' });
+    }
+    
+    const student = await Student.findById(req.params.id);
+    if (!student) return res.status(404).json({ message: 'Student not found' });
+    
+    student.password = password;
+    await student.save();
+    
+    res.json({ message: 'Password set successfully', student: { id: student._id, name: student.name } });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // Approve student (Admin only)
 router.put('/:id/approve', auth, adminOnly, async (req, res) => {
   try {
